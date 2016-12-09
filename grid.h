@@ -94,7 +94,8 @@ grid::~grid()
 	 {
 		 window.draw(b[i]);
 	 }
-	 bh.getboats(b, window);
+	 grid g;
+	 bh.getboats(b, window,g);
 }
  void grid::boats(sf::RenderWindow &window)
  { 
