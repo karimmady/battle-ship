@@ -1,10 +1,11 @@
 #ifndef boats_h
 #define boats_h
+#include<iostream>
+#include"grid.h"
+#include"boats.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include "grid.h"
-#include "menu.h"
-#include <iostream>
+
 using namespace std;
 
 class boats
@@ -39,13 +40,13 @@ void boats::getboats(sf::Sprite b[10], sf::RenderWindow &window)
 		{
 			while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-					//grid();
-					//grid g;
+					grid();
+					grid g;
 					sf::Vector2i npos = sf::Mouse::getPosition(window);
 					cout << "in\n";
 					b[4].setPosition(npos.x, npos.y);
-					//window.clear();
-					//g.gridu(window);
+					window.clear();
+	      			g.gridu(window);
 					//g.boats(window);
 					window.draw(b[4]);
 					window.display();
