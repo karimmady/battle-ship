@@ -2,8 +2,8 @@
 #define boats_h
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include "menu.h"
 #include "grid.h"
+#include "menu.h"
 #include <iostream>
 using namespace std;
 
@@ -13,11 +13,11 @@ public:
 	boats();
 	~boats();
 	void getboats(sf::Sprite b[10], sf::RenderWindow &window);
+	void drawboats(sf::Sprite boat[10], sf::RenderWindow &window);
 
 private:
 	sf::Sprite boat[10];
 	int i = 0;
-
 };
 boats::boats()
 {
@@ -25,37 +25,42 @@ boats::boats()
 }
 boats::~boats()
 {
+
 }
 void boats::getboats(sf::Sprite b[10], sf::RenderWindow &window)
 {
-	//sf::Vector2i position = sf::Mouse::getPosition(window);
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	sf::Vector2i pos = sf::Mouse::getPosition(window);
+	sf::Vector2f f;
+	f.x = pos.x;
+	f.y = pos.y;
+	while (sf::Mouse::isButtonPressed(sf::Mouse::Left))//&& b[4].getGlobalBounds().contains(f))
 	{
-		for (int i = 0; i < 10; i++)
+		if (b[4].getGlobalBounds().contains(f))
 		{
-			sf::Vector2i pos = sf::Mouse::getPosition(window);
-			sf::Vector2f f;
-			f.x = pos.x;
-			f.y = pos.y;
-			if (b[i].getGlobalBounds().contains(f))
+			while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				b[i].setPosition(pos.x, pos.y);
-				window.draw(b[i]);
+					//grid();
+					//grid g;
+					sf::Vector2i npos = sf::Mouse::getPosition(window);
+					cout << "in\n";
+					b[4].setPosition(npos.x, npos.y);
+					//window.clear();
+					//g.gridu(window);
+					//g.boats(window);
+					window.draw(b[4]);
+					window.display();
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+						b[4].setRotation(90);
+				
 			}
 		}
-
-
 	}
-
-	/*{
-		for (int i = 0; i < 10; i++)
-		{
-			if ((position.x - b[i].getPosition().x) < b[i].getPosition().x && (position.y - b[i].getPosition().y) < b[i].getPosition().y)
-			{
-				b[i].setPosition(position.x, position.y);
-				window.draw(b[i]);
-			}
-		}
-	}*/
+}
+void boats::drawboats(sf::Sprite boat[10], sf::RenderWindow & window)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		window.draw(boat[i]);
+	}
 }
 #endif // !boats_h
