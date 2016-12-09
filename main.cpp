@@ -2,9 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "menu.h"
 #include "grid.h"
+#include"boats.h"
 #include <iostream>
 using namespace std;
-
 int main()
 {
 	bool bisho = false;
@@ -29,16 +29,18 @@ int main()
 			{
 				m.mouse(sf::Mouse::getPosition(window), window,bisho);
 			}
-			while (bisho)
+			/*while (bisho)
 			{
 				grid g;
 				grid();
+				boats br;
 					window.clear();
 					g.gridu(window);
 					g.boats(window);
+					g.drawboats(window);
 					window.display();
 			
-			}
+			}*/
 			/*if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				grid g;
