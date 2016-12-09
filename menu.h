@@ -5,7 +5,6 @@
 #include"boats.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-
 using namespace std;
 
 class menub
@@ -85,10 +84,6 @@ void menub::mouse(sf::Vector2i pos, sf::RenderWindow &window, bool &bisho)
 	f.y = pos.y;
 	if (txt[0].getGlobalBounds().contains(f))
 	{
-		/*grid g;
-		grid();
-		g.gridu(window);*/
-		cout << "jhjk\n";
 		grid g;
 		g.boats(window);
 		while (window.isOpen())
@@ -115,22 +110,5 @@ void menub::mouse(sf::Vector2i pos, sf::RenderWindow &window, bool &bisho)
 	{
 		exit(0);
 	}
-	
-	/*sf::Event event;
-	cout << "--------------------" << endl;
-	cout << (int)txt[3].getPosition().x << endl;
-	cout << int(pos.x*0.7) << endl;
-	cout << (int)txt[3].getPosition().y << endl;
-	cout << int(pos.y*0.77) << endl;
-	if ((int(pos.x*0.7) == (t)txt[3].getLocalBounds().x) && int(pos.y*0.77) == ((int)txt[3].getPosition().y + 1.f))
-	{
-		system("pause");
-		exit(0);
-	}
-	if ((int(pos.x*0.7) == ((int)txt[3].getPosition().x)) && int(pos.y*0.77) == ((int)txt[3].getPosition().y + 1.f))
-	{
-		system("pause");
-		exit(0);
-	}*/
  }
 #endif /* menub_hpp */
