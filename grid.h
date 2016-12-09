@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include"boats.h"
+#include"menu.h"
 class grid
 {
 private:
@@ -17,13 +18,13 @@ private:
 	sf::Texture cruiser;
 	sf::Texture battle_ship;
 	sf::RectangleShape smalla[10][10];
-	sf::Sprite b[10];
 	boats bh;
+	sf::Sprite b[10];
 public:
 	grid();
 	void gridu(sf::RenderWindow &window);
 	~grid();
-	void drawgrid(sf::RectangleShape &ugrid);
+	void drawboats(sf::RenderWindow &window);
 	void boats(sf::RenderWindow &window);
 
 };
@@ -87,8 +88,13 @@ void grid::gridu(sf::RenderWindow &window)
 grid::~grid()
 {
 }
- void grid::drawgrid(sf::RectangleShape &ugrid)
+ void grid::drawboats(sf::RenderWindow &window)
 {
+	 for (int i = 0; i < 10; i++)
+	 {
+		 window.draw(b[i]);
+	 }
+	 bh.getboats(b, window);
 }
  void grid::boats(sf::RenderWindow &window)
  { 
@@ -98,28 +104,24 @@ grid::~grid()
 		 sub1.setPosition(840, 560);
 		 sub1.setScale(0.15, 0.23);
 		 sub1.setRotation(90);
-		 window.draw(sub1);
 		 b[0] = sub1;
 		
 		 sf::Sprite sub2(submarine);
 		 sub2.setPosition(870, 560);
 		 sub2.setScale(0.15, 0.23);
 		 sub2.setRotation(90);
-		 window.draw(sub2);
 		 b[1] = sub2;
 		
 		 sf::Sprite sub3(submarine);
 		 sub3.setPosition(900, 560);
 		 sub3.setScale(0.15, 0.23);
 		 sub3.setRotation(90);
-		 window.draw(sub3);
 		 b[2] = sub3;
 		
 		 sf::Sprite sub4(submarine);
 		 sub4.setPosition(930, 560);
 		 sub4.setScale(0.15, 0.23);
 		 sub4.setRotation(90);
-		 window.draw(sub4);
 		 b[3] = sub4;
 
 	 if (!battle_ship.loadFromFile("Battle_Ship .png"))
@@ -128,7 +130,6 @@ grid::~grid()
 	 battle1.setPosition(600, 430);
 	 battle1.setScale(0.5, 0.5);
 	 battle1.setRotation(90);
-	 window.draw(battle1);
 	 b[4] = battle1;
 	
 		 if (!cruiser.loadFromFile("Cruiser.png"))
@@ -137,14 +138,12 @@ grid::~grid()
 		 cruiser1.setPosition(610, 450);
 		 cruiser1.setScale(0.5, 0.9);
 		 //cruiser1.setRotation(90);
-		 window.draw(cruiser1);
 		 b[5] = cruiser1;
 	
 		 sf::Sprite cruiser2(cruiser);
 		 cruiser2.setPosition(660, 450);
 		 cruiser2.setScale(0.5, 0.9);
 		 //cruiser2.setRotation(90);
-		 window.draw(cruiser2);
 		 b[6] = cruiser2;
 
 		 if (!destroyer.loadFromFile("destroyer.png"))
@@ -153,22 +152,19 @@ grid::~grid()
 		 destroyer1.setPosition(720, 500);
 		 destroyer1.setScale(0.25, 0.18);
 		 //destroyer1.setRotation(90);
-		 window.draw(destroyer1);
 		 b[7] = destroyer1;
 		
 		 sf::Sprite destroyer2(destroyer);
 		 destroyer2.setPosition(750, 500);
 		 destroyer2.setScale(0.25, 0.18);
 		 //destroyer2.setRotation(90);
-		 window.draw(destroyer2);
 		 b[8] = destroyer2;
 
 		 sf::Sprite destroyer3(destroyer);
 		 destroyer3.setPosition(780, 500);
 		 destroyer3.setScale(0.25, 0.18);
 		 //destroyer3.setRotation(90);
-		 window.draw(destroyer3);
 		 b[9] = destroyer3;
-		 bh.getboats(b, window);
+		 //bh.getboats(b, window);
  }
 #endif grid_h
