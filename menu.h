@@ -2,10 +2,12 @@
 #define menub_hpp
 #include<iostream>
 #include"grid.h"
+#include"boats.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 using namespace std;
+
 class menub
 {
 public:
@@ -83,17 +85,25 @@ void menub::mouse(sf::Vector2i pos, sf::RenderWindow &window, bool &bisho)
 	f.y = pos.y;
 	if (txt[0].getGlobalBounds().contains(f))
 	{
-		grid g;
+		/*grid g;
 		grid();
-		g.gridu(window);
-		/*while (window.isOpen())
+		g.gridu(window);*/
+		cout << "jhjk\n";
+		grid g;
+		g.boats(window);
+		while (window.isOpen())
 		{
-			window.clear();*/
+			grid();
+			boats br;
+			window.clear();
 			g.gridu(window);
-			g.boats(window);
-			//window.display();
-		//}
-			bisho = true;
+			g.drawboats(window);
+			window.display();
+			g.drawboats(window);
+			
+			//g.drawboats(window);
+		}
+			//bisho = true;
 	}
 	if (txt[1].getGlobalBounds().contains(f))
 	{
