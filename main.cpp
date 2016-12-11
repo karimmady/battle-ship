@@ -1,17 +1,27 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include "menu.h"
-#include "grid.h"
-#include"boats.h"
 #include <iostream>
+#include <random>
+#include <ctime>
+#include "Menu.h"
+#include "Grid.h"
+#include "Boats.h"
 using namespace std;
-int main()
-{
-	bool bisho = false;
+
+int main() {
+	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1000, 600), "Battle ship");
-	menub();
-	menub m;
-	m.menu(1000, 600, window);
+
+	Menu m;
+	m.setMenu(1000, 600, window);
+
+	Grid g;
+	g.setGrid(window);
+	Boats b;
+	b.inBoats();
+
+	bool bisho = false;
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -27,37 +37,26 @@ int main()
 			}
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				m.mouse(sf::Mouse::getPosition(window), window,bisho);
+				m.mouse(sf::Mouse::getPosition(window), window, bisho);
 			}
-			/*while (bisho)
-			{
-				grid g;
-				grid();
-				boats br;
-					window.clear();
-					g.gridu(window);
-					g.boats(window);
-					g.drawboats(window);
-					window.display();
-			
-			}*/
-			/*if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
-			{
-				grid g;
-				grid();
-				g.gridu(window);
-				while (window.isOpen())
-				{
-					window.clear();
-					g.gridu(window);
-					g.boats(window);
-					window.display();
-				}
-			}*/
 		}
 		window.clear();
-		m.background(window);
-		m.draw(window);
+		//m.background(window);
+		if (!bisho)
+		{
+			m.background(window);
+			m.draw(window);
+		}
+		else {
+			g.draw(window);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				b.drag(window);
+			}
+			
+
+		}
+
 		window.display();
 	}
 	return EXIT_SUCCESS;
