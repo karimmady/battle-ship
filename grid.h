@@ -1,61 +1,76 @@
-#ifndef Grid_h
-#define Grid_h
+#ifndef grid_h
+#define grid_h
+
 #include<iostream>
 #include <string>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include "Boats.h"
-#include "menu.h"
+#include "boats.h"
+#include "play.h"
+#include "ai.h"
+using namespace std;
 
-class Grid
-{
+class grid {
+	friend class ai;
+	friend class play;
 private:
-	const int q = 50;
-	int userGrid[10][10];
-	sf::Sprite usGrid;
-	sf::Texture user_Grid;
-	sf::RectangleShape smalla[10][10];
-	Boats boats;
+	sf::Sprite usgrid;
+	sf::Texture user_grid;
+	sf::RectangleShape playerVisibleGrid[10][10];
+	sf::RectangleShape compVisibleGrid[10][10];
+	boats playerBoats;
+	play game;
 public:
-	Grid();
-	void setGrid(sf::RenderWindow &window);
+	void setgrid(sf::RenderWindow &window);
+	void handleEvents(sf::RenderWindow &window, sf::Event event);
 	void draw(sf::RenderWindow &window);
 };
 
-Grid::Grid()
-{
+
+void grid::setgrid(sf::RenderWindow &window){
+	// player Grid
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			playerVisibleGrid[i][j].setOutlineThickness(5);
+			playerVisibleGrid[i][j].setOutlineColor(sf::Color::Black);
+			playerVisibleGrid[i][j].setFillColor(sf::Color(32, 50, 81));
+			playerVisibleGrid[i][j].setSize(sf::Vector2f(50, 50));
+			playerVisibleGrid[i][j].setPosition(
+				sf::Vector2f(50 + j * 50,
+				50 + i * 50));
+		}
+	}
+
+	// computer Grid
+	int compGridStartX = 50 * (10 + 2);
+	int compGridStartY = 50;
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			compVisibleGrid[i][j].setOutlineThickness(5);
+			compVisibleGrid[i][j].setOutlineColor(sf::Color::Black);
+			compVisibleGrid[i][j].setFillColor(sf::Color(32, 50, 81));
+			compVisibleGrid[i][j].setSize(sf::Vector2f(25, 25));
+			compVisibleGrid[i][j].setPosition(
+				sf::Vector2f(compGridStartX + j * 25,
+				compGridStartX + i * 25));
+		}
+	}
+}
+
+void grid::handleEvents(sf::RenderWindow &window, sf::Event event) {
+	playerBoats.handleEvents(window, event);
+	if (playerBoats.start)
+		game.run(playerBoats, *this);
+}
+void grid::draw(sf::RenderWindow &window){
 	for (int i = 0; i < 10; i++)
 		for (int j = 0; j < 10; j++)
-			userGrid[i][j] = 0;
-}
-
-void Grid::setGrid(sf::RenderWindow &window)
-{
-	int x = 0, y = 0;
-	for (int i = 0; i<10; i++)
-		for (int j = 0; j<10; j++) {
-			sf::RectangleShape small(sf::Vector2f(q, q));
-			small.setOutlineThickness(5);
-			small.setOutlineColor(sf::Color::Black);
-			small.setFillColor(sf::Color(32, 50, 81));
-			small.setPosition(x + (q), y + (q));
-			smalla[i][j] = small;
-			if (j == 9)
-			{
-				y += q;
-				x = 0;
-			}
-			else
-				x += q;
+		{
+			window.draw(playerVisibleGrid[i][j]);
+			window.draw(compVisibleGrid[i][j]);
 		}
+	playerBoats.drawboats(window);
 }
 
-void Grid::draw(sf::RenderWindow &window) {
-	for (int i = 0; i<10; i++)
-		for (int j = 0; j<10; j++)
-			window.draw(smalla[i][j]);
 
-	boats.drawBoats(window);
-}
-
-#endif // Grid_h
+#endif // grid_h
