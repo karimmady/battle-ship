@@ -92,6 +92,7 @@ void Menu::mouse(sf::Vector2i pos, sf::RenderWindow &window, bool &bisho)
 	}
 	if (txt[2].getGlobalBounds().contains(f))
 	{
+		//cout << "hi mazen\n" << endl;
 	}
 	if (txt[3].getGlobalBounds().contains(f))
 	{
