@@ -4,8 +4,8 @@
 #include <random>
 #include <ctime>
 #include "Menu.h"
-#include "Grid.h"
-#include "Boats.h"
+#include "grid.h"
+#include "boats.h"
 using namespace std;
 
 int main() {
@@ -15,11 +15,8 @@ int main() {
 	Menu m;
 	m.setMenu(1000, 600, window);
 
-	Grid g;
-	g.setGrid(window);
-	Boats b;
-	b.inBoats();
-
+	grid g;
+	g.setgrid(window);
 	bool bisho = false;
 
 	while (window.isOpen())
@@ -40,6 +37,7 @@ int main() {
 				m.mouse(sf::Mouse::getPosition(window), window, bisho);
 			}
 		}
+
 		window.clear();
 		//m.background(window);
 		if (!bisho)
@@ -48,13 +46,8 @@ int main() {
 			m.draw(window);
 		}
 		else {
+			g.handleEvents(window, event);
 			g.draw(window);
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			{
-				b.drag(window);
-			}
-			
-
 		}
 
 		window.display();
